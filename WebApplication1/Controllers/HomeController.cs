@@ -63,11 +63,17 @@ namespace WebApplication1.Controllers
 
         #endregion
 
+        #region principal
+
         [HttpGet]
         public ActionResult Principal()
         {
             return View();
         }
+
+
+
+        #endregion principal
 
     }
 }
