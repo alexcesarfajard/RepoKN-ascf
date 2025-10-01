@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BD_KNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="T_Perfiles">
+          <Key>
+            <PropertyRef Name="ConsecutivoPerfil" />
+          </Key>
+          <Property Name="ConsecutivoPerfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_Usuarios">
+          <Key>
+            <PropertyRef Name="ConsecutivoUsuario" />
+          </Key>
+          <Property Name="ConsecutivoUsuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identificacion" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contrasenna" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="ConsecutivoPerfil" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_T_Usuarios_T_Perfil">
+          <End Role="T_Perfiles" Type="Self.T_Perfiles" Multiplicity="1" />
+          <End Role="T_Usuarios" Type="Self.T_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Perfiles">
+              <PropertyRef Name="ConsecutivoPerfil" />
+            </Principal>
+            <Dependent Role="T_Usuarios">
+              <PropertyRef Name="ConsecutivoPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CrearUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Identificacion" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="CorreoElectronico" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="BD_KNModelStoreContainer">
+          <EntitySet Name="T_Perfiles" EntityType="Self.T_Perfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Usuarios" EntityType="Self.T_Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_T_Usuarios_T_Perfil" Association="Self.FK_T_Usuarios_T_Perfil">
+            <End Role="T_Perfiles" EntitySet="T_Perfiles" />
+            <End Role="T_Usuarios" EntitySet="T_Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_KNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="T_Perfiles">
+          <Key>
+            <PropertyRef Name="ConsecutivoPerfil" />
+          </Key>
+          <Property Name="ConsecutivoPerfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="T_Usuarios" Relationship="Self.FK_T_Usuarios_T_Perfil" FromRole="T_Perfiles" ToRole="T_Usuarios" />
+        </EntityType>
+        <EntityType Name="T_Usuarios">
+          <Key>
+            <PropertyRef Name="ConsecutivoUsuario" />
+          </Key>
+          <Property Name="ConsecutivoUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identificacion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasenna" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="ConsecutivoPerfil" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_Perfiles" Relationship="Self.FK_T_Usuarios_T_Perfil" FromRole="T_Usuarios" ToRole="T_Perfiles" />
+        </EntityType>
+        <Association Name="FK_T_Usuarios_T_Perfil">
+          <End Role="T_Perfiles" Type="Self.T_Perfiles" Multiplicity="1" />
+          <End Role="T_Usuarios" Type="Self.T_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Perfiles">
+              <PropertyRef Name="ConsecutivoPerfil" />
+            </Principal>
+            <Dependent Role="T_Usuarios">
+              <PropertyRef Name="ConsecutivoPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_KNEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_Perfiles" EntityType="Self.T_Perfiles" />
+          <EntitySet Name="T_Usuarios" EntityType="Self.T_Usuarios" />
+          <AssociationSet Name="FK_T_Usuarios_T_Perfil" Association="Self.FK_T_Usuarios_T_Perfil">
+            <End Role="T_Perfiles" EntitySet="T_Perfiles" />
+            <End Role="T_Usuarios" EntitySet="T_Usuarios" />
+          </AssociationSet>
+          <FunctionImport Name="CrearUsuarios">
+            <Parameter Name="Identificacion" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="Contrasenna" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_KNModelStoreContainer" CdmEntityContainer="BD_KNEntities">
+          <EntitySetMapping Name="T_Perfiles">
+            <EntityTypeMapping TypeName="BD_KNModel.T_Perfiles">
+              <MappingFragment StoreEntitySet="T_Perfiles">
+                <ScalarProperty Name="ConsecutivoPerfil" ColumnName="ConsecutivoPerfil" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Usuarios">
+            <EntityTypeMapping TypeName="BD_KNModel.T_Usuarios">
+              <MappingFragment StoreEntitySet="T_Usuarios">
+                <ScalarProperty Name="ConsecutivoUsuario" ColumnName="ConsecutivoUsuario" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ConsecutivoPerfil" ColumnName="ConsecutivoPerfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CrearUsuarios" FunctionName="BD_KNModel.Store.CrearUsuarios" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using WebApplication1.EF;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -36,6 +37,26 @@ namespace WebApplication1.Controllers
         public ActionResult Registro(Usuario usuario)
         {
             /*Progra para guardar un usuario en la BD */
+            using (var context = new BD_KNEntities())
+            {
+                //var nuevoUsuario = new T_Usuarios()
+                //{
+                //    Identificacion = usuario.Identificacion,
+                //    Nombre = usuario.Nombre,
+                //    CorreoElectronico = usuario.CorreoElectronico,
+                //    Contrasenna = usuario.Contrasenna,
+                //    ConsecutivoPerfil = 2,
+                //    Estado = true
+
+                //};
+
+                //context.T_Usuarios.Add(nuevoUsuario); 
+                //context.SaveChanges(); // guardar nuevo usuario en la BD.T_Usuarios. Básicamente un Insert
+
+                context.CrearUsuarios(usuario.Identificacion, usuario.Nombre, usuario.CorreoElectronico, usuario.Contrasenna);
+
+            }
+
 
             return View();
         }
