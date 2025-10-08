@@ -22,17 +22,17 @@
                     </div>
                 }
 
-                @using (Html.BeginForm("Index", "Home"))
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "FormIniciarSesion" }))
                 {
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
-                        @Html.TextBoxFor(x => x.CorreoElectronico, new { @class = "form-control", @type = "email" })
+                        @Html.TextBoxFor(x => x.CorreoElectronico, new { @class = "form-control" })
                     </div>
 
 
                     <div class="mb-3 form-password-toggle">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-end">
                             <label class="form-label" for="password">Contraseña</label>
                             <a href="@Url.Action("RecuperarAcceso", "Home")">
                                 <small>Olvidó su contraseña?</small>
@@ -59,3 +59,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/StaticFiles/js/IniciarSesion.js"></script>

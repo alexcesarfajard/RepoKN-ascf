@@ -107,7 +107,22 @@ namespace WebApplication1.Controllers
             /*Generar una contraseña temporal*/
             /*Enviar esa contraseña temporal para iniciar sesion*/
 
-            return View();
+            using (var context = new BD_KNEntities())
+            {
+                //Se valida si el usuario ya existe
+                var resultadoConsulta = context.T_Usuarios.Where
+                    (x => x.CorreoElectronico == usuario.CorreoElectronico).FirstOrDefault();
+
+                //Si existe se manda a recupear el acceso
+                if (resultadoConsulta != null)
+                {
+
+                }
+
+                ViewBag.Mensaje = "La información no se ha podido reestablecer";
+                return View();
+            }
+
         }
 
         #endregion
