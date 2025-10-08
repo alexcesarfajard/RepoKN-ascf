@@ -15,17 +15,23 @@
                     </a>
                 </div>
 
+                @if (ViewBag.Mensaje != null)
+                {
+                    <div class="alert alert-primary text-center">
+                        @ViewBag.Mensaje
+                    </div>
+                }
 
-                @using(Html.BeginForm("Registro", "Home"))
+                @using (Html.BeginForm("Registro", "Home"))
                 {
                     <div class="mb-3">
                         <label for="username" class="form-label">Identificación</label>
-                        @Html.TextBoxFor(x => x.Identificacion, new { @class = "form-control" })
+                        @Html.TextBoxFor(x => x.Identificacion, new { @class = "form-control", @onkeyup = "ConsultarNombre();" })
                     </div>
 
                     <div class="mb-3">
                         <label for="username" class="form-label">Nombre</label>
-                        @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control" })
+                        @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control", @ReadOnly="true" })
                     </div>
 
                     <div class="mb-3">
@@ -54,3 +60,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/StaticFiles/js/registro.js"></script>

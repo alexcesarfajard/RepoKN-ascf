@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using WebApplication1.EF;
 using WebApplication1.Models;
 
@@ -20,7 +21,24 @@ namespace WebApplication1.Controllers
 
             /*Progra para validar si usuario.CorreoElectronico y usuario.Contrasenna son válidas */
 
-            return RedirectToAction("Principal", "Home");
+            using (var context = new BD_KNEntities())
+            {
+
+                //var resultado = context.T_Usuarios.Where
+                //   (x => x.CorreoElectronico == usuario.CorreoElectronico && x.Contrasenna == usuario.Contrasenna 
+                //   && x.Estado == true ).FirstOrDefault();
+
+                var resultado = context.ValidarUsuarios(usuario.CorreoElectronico, usuario.Contrasenna).FirstOrDefault();
+
+                if (resultado != null)
+                {
+                    return RedirectToAction("Principal", "Home");
+                }
+
+                ViewBag.Mensaje = "La informacion no se ha podido autenticar";
+                return View();
+
+            }
         }
 
         #endregion
@@ -53,12 +71,22 @@ namespace WebApplication1.Controllers
                 //context.T_Usuarios.Add(nuevoUsuario); 
                 //context.SaveChanges(); // guardar nuevo usuario en la BD.T_Usuarios. Básicamente un Insert
 
-                context.CrearUsuarios(usuario.Identificacion, usuario.Nombre, usuario.CorreoElectronico, usuario.Contrasenna);
+                var resultado = context.CrearUsuarios
+                    (usuario.Identificacion, usuario.Nombre, usuario.CorreoElectronico, usuario.Contrasenna);
+
+                // -1 no se cumple sentencia
+                // 0 es que intentó pero no hizo nada
+                // > 0 la cantidad de filas que se insertaron
+
+
+                if (resultado > 0) {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ViewBag.Mensaje = "La informacion no se ha podido registrar";
+                return View();
 
             }
-
-
-            return View();
         }
 
         #endregion

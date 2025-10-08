@@ -130,26 +130,29 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="EF\Model1.Context.cs">
+    <Compile Include="EF\BD_KN.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>BD_KN.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Model1.cs">
+    <Compile Include="EF\BD_KN.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>BD_KN.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Model1.Designer.cs">
+    <Compile Include="EF\BD_KN.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>BD_KN.edmx</DependentUpon>
     </Compile>
     <Compile Include="EF\T_Perfiles.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>BD_KN.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\T_Usuarios.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>BD_KN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ValidarUsuarios_Result.cs">
+      <DependentUpon>BD_KN.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -158,15 +161,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EF\Model1.Context.tt">
+    <Content Include="EF\BD_KN.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>BD_KN.edmx</DependentUpon>
+      <LastGenOutput>BD_KN.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EF\Model1.tt">
+    <Content Include="EF\BD_KN.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>BD_KN.edmx</DependentUpon>
+      <LastGenOutput>BD_KN.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -187,6 +190,7 @@
     <Content Include="StaticFiles\js\menu.js" />
     <Content Include="StaticFiles\js\perfect-scrollbar.js" />
     <Content Include="StaticFiles\js\popper.js" />
+    <Content Include="StaticFiles\js\registro.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -205,12 +209,12 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="EF\Model1.edmx">
+    <EntityDeploy Include="EF\BD_KN.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>BD_KN.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="EF\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="EF\BD_KN.edmx.diagram">
+      <DependentUpon>BD_KN.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <Content Include="StaticFiles\fonts\boxicons.eot" />
