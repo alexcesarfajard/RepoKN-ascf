@@ -1,0 +1,36 @@
+﻿@model WebApplication1.Models.Usuario
+
+@{
+    ViewBag.Title = "VerPerfil";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-xl-1">
+    </div>
+
+    <div class="col-xl-10">
+
+        <div class="card mb-4 mt-4">
+            <h5 class="card-header">Información del Perfil</h5>
+
+            @if (ViewBag.Mensaje != null)
+            {
+                <div class="alert alert-primary text-center">
+                    @ViewBag.Mensaje
+                </div>
+            }
+
+            @using (Html.BeginForm("CambiarAcceso", "Home", FormMethod.Post, new { @id = "FormSeguridad" }))
+            {
+                
+            }
+
+        </div>
+
+    </div>
+</div>
+
+<script src="~/StaticFiles/js/VerPerfil.js"></script>
+

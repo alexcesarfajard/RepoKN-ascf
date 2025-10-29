@@ -7,8 +7,19 @@ using System.Web.Mvc;
 namespace WebApplication1.Services
 {
 
-    public override void OnActionExecuting
-        
+    public class Seguridad : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            var sesion = filterContext.HttpContext.Session;
 
+            if (sesion["ConsecutivoUsuario"] == null)
+            {
+                filterContext.Result = new RedirectResult("~/Home/Index");
+            }
+
+            base.OnActionExecuting(filterContext);
+        }
+    }
 
 }

@@ -9,9 +9,13 @@ using System.Security.Cryptography;
 using System.Web.Mvc;
 using WebApplication1.EF;
 using WebApplication1.Models;
+using WebApplication1.Services;
+using System.Web.UI;
+
 
 namespace WebApplication1.Controllers
 {
+
     public class HomeController : Controller
     {
 
@@ -191,6 +195,7 @@ namespace WebApplication1.Controllers
         public ActionResult CerrarSesion()
         {
             Session.Clear();
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
 
