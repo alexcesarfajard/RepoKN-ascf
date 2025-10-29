@@ -29,6 +29,8 @@ namespace WebApplication1.EF
     
         public virtual DbSet<T_Perfiles> T_Perfiles { get; set; }
         public virtual DbSet<T_Usuarios> T_Usuarios { get; set; }
+        public virtual DbSet<tbCategoria> tbCategoria { get; set; }
+        public virtual DbSet<tbProducto> tbProducto { get; set; }
     
         public virtual int CrearUsuarios(string identificacion, string nombre, string correoElectronico, string contrasenna)
         {

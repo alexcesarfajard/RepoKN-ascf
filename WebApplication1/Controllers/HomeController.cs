@@ -1,4 +1,11 @@
-﻿using System.Linq;
+﻿using KN_ProyectoWeb.Services;
+using System;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Web.Mvc;
 using WebApplication1.EF;
 using WebApplication1.Models;
@@ -7,6 +14,9 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
+
+        Utilitarios utilitarios = new Utilitarios();
+
         #region Iniciar Sesion
 
         [HttpGet]
@@ -32,6 +42,9 @@ namespace WebApplication1.Controllers
 
                 if (resultado != null)
                 {
+                    Session["ConsecutivoUsuario"] = resultado.ConsecutivoUsuario;
+                    Session["NombreUsuario"] = resultado.Nombre;
+                    Session["PerfilUsuario"] = resultado.ConsecutivoPerfil;
                     return RedirectToAction("Principal", "Home");
                 }
 
@@ -116,6 +129,42 @@ namespace WebApplication1.Controllers
                 //Si existe se manda a recupear el acceso
                 if (resultadoConsulta != null)
                 {
+                    var contrasennaGenerada = utilitarios.GenerarContrasenna();
+
+                    // actualizar contraseña
+
+                    resultadoConsulta.Contrasenna = contrasennaGenerada;
+
+                    var resultadoActualizacion = context.SaveChanges(); // guardando nueva contraseña
+
+                    //Informar cual es la nueva contraseña
+                    if (resultadoActualizacion > 0)
+                    {
+
+                        //StringBuilder mensaje = new StringBuilder();
+                        //mensaje.Append("Estimado(a) " + resultadoConsulta.Nombre + "<br>");
+                        //mensaje.Append("Se ha generado una solicitud de recuperación de acceso a su nombre" + "<br><br>");
+                        //mensaje.Append("Su nueva contraseña de acceso es: <b>" + contrasennaGenerada + "</b><br><br>");
+                        //mensaje.Append("Procure realizar el cambio de su contraseña una vez ingrese al sistema" + "<br><br>");
+                        //mensaje.Append("Muchas gracias");
+
+                        string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
+                        string path = Path.Combine(projectRoot, "TemplateRecuperacion.html");
+
+                        // Leer todo el HTML
+                        string htmlTemplate = System.IO.File.ReadAllText(path);
+
+                        // Reemplazar placeholders
+                        string mensaje = htmlTemplate
+                            .Replace("{{Nombre}}", resultadoConsulta.Nombre)
+                            .Replace("{{Contrasena}}", contrasennaGenerada);
+
+                        utilitarios.EnviarCorreo("Contraseña de acceso", mensaje, resultadoConsulta.CorreoElectronico);
+                        return RedirectToAction("Index", "Home");
+
+
+                    }
+
 
                 }
 
@@ -129,15 +178,21 @@ namespace WebApplication1.Controllers
 
         #region principal
 
+        [Seguridad]
         [HttpGet]
         public ActionResult Principal()
         {
             return View();
         }
 
-
-
         #endregion principal
+
+        [HttpGet]
+        public ActionResult CerrarSesion()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }
