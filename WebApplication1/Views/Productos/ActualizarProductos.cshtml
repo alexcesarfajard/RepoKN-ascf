@@ -1,0 +1,29 @@
+﻿@model WebApplication1.Models.Producto
+
+@{
+    ViewBag.Title = "ActualizarProductos";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<label class="form-label">Categoría</label>
+@Html.DropDownListFor(x => x.ConsecutivoCategoria, ViewBag.ListaCategorias as List<SelectListItem>, new { @class = "form-control" })
+            </div>
+
+<div class="mb-3">
+    <label class="form-label">Imagen</label>
+    <input type="file" class="form-control" id="ImgProducto" name="ImgProducto">
+</div>
+
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary d-grid w-25" type="submit">Procesar</button>
+</div>
+        </div>
+            }
+
+        </div>
+
+    </div>
+</div>
+
+<script src="~/StaticFiles/js/ActualizarProducto.js"></script>
+

@@ -49,6 +49,8 @@ namespace WebApplication1.Controllers
                     Session["ConsecutivoUsuario"] = resultado.ConsecutivoUsuario;
                     Session["NombreUsuario"] = resultado.Nombre;
                     Session["PerfilUsuario"] = resultado.ConsecutivoPerfil;
+                    Session["ConsecutivoPerfil"] = resultado.ConsecutivoPerfil;
+
                     return RedirectToAction("Principal", "Home");
                 }
 
